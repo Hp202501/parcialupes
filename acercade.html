@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarjeta de Presentación</title>
+    <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(26, 26, 26, 0.97);
+      color: white;
+      padding: 12px 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ffcc00;
+      text-decoration: none;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 18px;
+    }
+
+    .nav-links li {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 0;
+      background: #ffcc00;
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffcc00;
+      background: rgba(255,204,0,0.07);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Tooltip */
+    .nav-links a[title]:hover::before {
+      content: attr(title);
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: #ffcc00;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0.95;
+      z-index: 10;
+    }
+
+    /* --- Contenido principal --- */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .game-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .game-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .game-card h2 {
+      padding: 15px;
+      background: #f0f0f0;
+      font-size: 1.4rem;
+      color: #1a1a1a;
+    }
+
+    .game-card p {
+      padding: 15px;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 0.9rem;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+    }
+
+    /* --- Tarjeta de presentación --- */
+    .card {
+      max-width: 340px;
+      margin: 40px auto 0;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+      padding: 32px 28px 24px;
+      text-align: center;
+      border: 1px solid #e5e5e5;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(255,204,0,0.13), 0 4px 16px rgba(0,0,0,0.16);
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .card .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      border: 3px solid #ffcc00;
+      margin-bottom: 18px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(255,204,0,0.10);
+    }
+
+    .card .name {
+      font-size: 1.35rem;
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .card .role {
+      color: #ffcc00;
+      font-size: 1.05rem;
+      margin-bottom: 18px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .card .contact {
+      color: #555;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .card .contact div {
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav-logo {
+        font-size: 1.1rem;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 22px 8px 18px;
+        max-width: 98vw;
+      }
+      .card .avatar {
+        width: 70px;
+        height: 70px;
+      }
+    }
+    </style>
+</head>
+<body>
+     <nav>
+    <div class="nav-container" role="navigation" aria-label="Menú principal">
+      <a href="index.html" class="nav-logo" aria-label="Inicio">
+        🎮 <span>Tutoriales</span>
+      </a>
+      <ul class="nav-links">
+        <li>
+          <a href="zelda.html" title="Guía de Zelda: Tears of the Kingdom" aria-label="Zelda">
+            🗡️ Zelda
+          </a>
+        </li>
+        <li>
+          <a href="halo.html" title="Guía de Halo Infinite" aria-label="Halo">
+            🛡️ Halo
+          </a>
+        </li>
+        <li>
+          <a href="minecraft.html" title="Guía de Minecraft" aria-label="Minecraft">
+            ⛏️ Minecraft
+          </a>
+        </li>
+        <li>
+          <a href="dark-souls.html" title="Guía de Dark Souls III" aria-label="Dark Souls">
+            ⚔️ Dark Souls
+          </a>
+        </li>
+        <li>
+          <a href="portal.html" title="Guía de Portal 2" aria-label="Portal">
+            🌀 Portal
+          </a>
+        </li>
+        <li>
+          <a href="gta-v.html" title="Guía de GTA V" aria-label="GTA V">
+            🚗 GTA V
+          </a>
+        </li>
+        <a href="acercade.html" title="Acerca del estudiante" aria-label="Acerca de">
+          👨‍💻 Acerca
+        </a>
+      </ul>
+    </div>
+  </nav>
+    <div class="card">
+        <img class="avatar" src="imagenes/Captura de pantalla 2025-09-03 222132.png" alt="Avatar">
+        <div class="name">Reynaldo Soriano</div>
+        <div class="role">Desarrollador Web</div>
+        <div class="contact">
+            <div>Email: reynaldo@email.com</div>
+            <div>Tel: +52 123 456 7890</div>
+        </div>
+    </div>
+</body>
+</html>
